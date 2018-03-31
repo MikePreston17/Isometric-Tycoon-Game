@@ -274,6 +274,11 @@ public partial class Park : MonoBehaviour
                 vertices.Add(new Vector3(corners[2].x, TerrainMap[r, c].h2, corners[2].z));
                 vertices.Add(new Vector3(corners[3].x, TerrainMap[r, c].h3, corners[3].z));
                 // store the indexes of the top verts so we can make future triangles
+                uvs.Add(new Vector2(0, 0));
+                uvs.Add(new Vector2(0, 1));
+                uvs.Add(new Vector2(1, 0));
+                uvs.Add(new Vector2(1, 1));
+                // temp uvs, will make better later
                 ind0 = vertices.Count - 4;
                 ind1 = vertices.Count - 3;
                 ind2 = vertices.Count - 2;

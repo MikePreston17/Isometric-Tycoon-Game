@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
     Plane origin = new Plane(Vector3.up, Vector3.zero);
     Vector3 cursor;
     Vector3 focus;
@@ -12,17 +11,26 @@ public class CameraController : MonoBehaviour {
     int terrainMask = 1 << 8;
     RaycastHit info;
     Ray ray;
-    void Awake() {
+
+    //public GameObject ProjectorObject;
+
+    void Awake()
+    {
         velocity = 0;
-        Park.Instance.Load("debug");
+        //Park.Instance.Load("debug");
+        var park = Park.Instance;
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         origin.Raycast(ray, out dist);
         cursor = ray.GetPoint(dist);
-        if (Physics.Raycast(ray, out info, Mathf.Infinity, terrainMask)) {
+        if (Physics.Raycast(ray, out info, Mathf.Infinity, terrainMask))
+        {
+            //ProjectorObject.transform.position = new Vector3(info.transform.position.x, 150, info.transform.position.z);
+            //ProjectorObject.transform.rotation = Quaternion.Euler(90, 0, 0);
             //Debug.Log("Hit the terrain!");
         }
         velocity += Input.GetAxis("Scroll");
@@ -32,20 +40,22 @@ public class CameraController : MonoBehaviour {
         transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * Time.deltaTime * dist / 4, Space.Self);
         transform.Translate(new Vector3(0, 1, 1) * Input.GetAxis("Vertical") * Time.deltaTime * dist / 4, Space.Self);
         transform.Translate(Vector3.forward * velocity * Time.deltaTime * 1000, Space.Self);
-        if (Input.GetKeyDown(KeyCode.Q)) {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
             transform.RotateAround(focus, Vector3.up, 90f);
         }
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
             transform.RotateAround(focus, Vector3.up, -90f);
         }
-        if (Input.GetKeyDown(KeyCode.P)) {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
             //Park.Instance.Save("debug");
         }
-
-
     }
-    private void LateUpdate() {
+    private void LateUpdate()
+    {
         velocity *= .99f * Time.deltaTime; // todo: scale accurately to framerate
-
     }
+
 }
