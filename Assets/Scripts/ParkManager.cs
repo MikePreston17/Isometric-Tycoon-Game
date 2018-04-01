@@ -48,7 +48,7 @@ public class ParkManager
             }
         }
         Debug.Log("Loaded file " + fileName + fileExtension);
-        park.GenerateAllGuadrantMeshes();
+        park.GenerateAllQuadrantMeshes();
     }
 
     public void Load(string fileName)
