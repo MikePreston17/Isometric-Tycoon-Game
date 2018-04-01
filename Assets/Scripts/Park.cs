@@ -1,4 +1,4 @@
-﻿using ProtoBuf;
+﻿//using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -85,11 +85,13 @@ public partial class Park : MonoBehaviour
         Vector3 transform = new Vector3(.5f + xOffset, 0, .5f + zOffset);
         return transform;
     }
-    public Vector3 GetTiledVector3(Vector3 orig) {
+    public Vector3 GetTiledVector3(Vector3 orig)
+    {
         throw new NotImplementedException();
     }
 
-    public Vector3[] GetCorneredVector3(int row, int column) {
+    public Vector3[] GetCorneredVector3(int row, int column)
+    {
         Vector3 transform = GetTiledVector3(row, column);
         Vector3[] corners = {
             new Vector3(transform.x - .5f,transform.y,transform.z + .5f),
@@ -99,7 +101,8 @@ public partial class Park : MonoBehaviour
         };
         return corners;
     }
-    public bool Raise(int row, int column, float d0, float d1, float d2, float d3) {
+    public bool Raise(int row, int column, float d0, float d1, float d2, float d3)
+    {
         TerrainTile tile = TerrainMap[row, column];
         if (tile != null)
         {
@@ -181,36 +184,50 @@ public partial class Park : MonoBehaviour
     }
     #endregion Terrain Editor
 
-    #region Park File Functionality
+    //#region Park File Functionality
 
-    //todo: move these funcs to a Park Manager class.  Park instances do not need to know how to load themselves (SRP)
-    public void Save(string filename) {
-        string filePath = string.Format("{0}{1}", filename, fileExtension);
-        if (File.Exists(filePath))
-            File.Delete(filePath);
-        var file = File.Create(filename + fileExtension + "");
-        for (int row = 0; row < TilesZ; row++) {
-            for (int column = 0; column < TilesX; column++) {
-                Serializer.Serialize(file, TerrainMap[row, column]);
-            }
-        }
-        file.Close();
-    }
+    ////todo: move these funcs to a Park Manager class.  Park instances do not need to know how to load themselves (SRP)
+    //public void Save(string filename)
+    //{
+    //    string filePath = string.Format("{0}{1}", filename, fileExtension);
 
-    public void Load(string filename) {
-        TerrainTile tile;
-        using (var file = File.OpenRead(filename + fileExtension)) {
-            for (int row = 0; row < TilesZ; row++) {
-                for (int column = 0; column < TilesX; column++) {
-                    tile = Serializer.Deserialize<TerrainTile>(file);
-                    TerrainMap[tile.row, tile.column] = Serializer.Deserialize<TerrainTile>(file);
-                }
-            }
-        }
-        Debug.Log("Loaded file " + filename + fileExtension);
-        GenerateAllGuadrantMeshes();
-    }
-    #endregion Park File Functionality
+    //    if (File.Exists(filePath))
+    //    {
+    //        File.Delete(filePath);
+    //    }
+
+    //    var file = File.Create(filename + fileExtension + "");
+
+    //    for (int row = 0; row < TilesZ; row++)
+    //    {
+    //        for (int column = 0; column < TilesX; column++)
+    //        {
+    //            Serializer.Serialize(file, TerrainMap[row, column]);
+    //        }
+    //    }
+
+    //    file.Close();
+    //}
+
+    //public void Load(string filename)
+    //{
+    //    TerrainTile tile;
+    //    using (var file = File.OpenRead(filename + fileExtension))
+    //    {
+    //        for (int row = 0; row < TilesZ; row++)
+    //        {
+    //            for (int column = 0; column < TilesX; column++)
+    //            {
+    //                tile = Serializer.Deserialize<TerrainTile>(file);
+    //                TerrainMap[tile.row, tile.column] = Serializer.Deserialize<TerrainTile>(file);
+    //            }
+    //        }
+    //    }
+    //    Debug.Log("Loaded file " + filename + fileExtension);
+    //    GenerateAllGuadrantMeshes();
+    //}
+
+    //#endregion Park File Functionality
 
     #region Quadrant Generation
 
@@ -242,14 +259,16 @@ public partial class Park : MonoBehaviour
         Quadrants[3].TopBoundary = (TilesZ / 2) - 1;
         GenerateQuadrantMesh(0);
     }
-    public bool IsTerrainLevel(int row, int column) {
+    public bool IsTerrainLevel(int row, int column)
+    {
         TerrainTile tile = TerrainMap[row, column];
         if (tile.h0 == tile.h1 && tile.h0 == tile.h2 && tile.h0 == tile.h3)
             return true;
         return false;
     }
 
-    public void GenerateQuadrantMesh(int quadrantID) {
+    public void GenerateQuadrantMesh(int quadrantID)
+    {
         Mesh mesh = Quadrants[quadrantID].GetComponent<MeshFilter>().mesh;
         mesh.Clear();
         List<Vector3> vertices = new List<Vector3>();
@@ -285,13 +304,15 @@ public partial class Park : MonoBehaviour
                 ind3 = vertices.Count - 1;
                 // top normals
                 // todo: normals aren't always up, depending upon how the terrain is angled
-                if (TerrainMap[r,c].h0 > 0 && TerrainMap[r,c].h1 > 0 && TerrainMap[r,c].h2 > 0 && TerrainMap[r,c].h3 > 0) {
+                if (TerrainMap[r, c].h0 > 0 && TerrainMap[r, c].h1 > 0 && TerrainMap[r, c].h2 > 0 && TerrainMap[r, c].h3 > 0)
+                {
                     normals.Add(Vector3.up);
                     normals.Add(Vector3.up);
                     normals.Add(Vector3.up);
                     normals.Add(Vector3.up);
                 }
-                else {
+                else
+                {
                     normals.Add(Vector3.down);
                     normals.Add(Vector3.down);
                     normals.Add(Vector3.down);
@@ -372,11 +393,12 @@ public partial class Park : MonoBehaviour
                     normals.Add(Vector3.back);
                     normals.Add(Vector3.back);
                 }
-                if (c < TilesX - 1 && (TerrainMap[r,c].h1 > TerrainMap[r, c+1].h0 || TerrainMap[r,c].h2 > TerrainMap[r,c+1].h3)) { // right cliff face
+                if (c < TilesX - 1 && (TerrainMap[r, c].h1 > TerrainMap[r, c + 1].h0 || TerrainMap[r, c].h2 > TerrainMap[r, c + 1].h3))
+                { // right cliff face
                     vertices.Add(vertices[ind1]);
                     vertices.Add(vertices[ind2]);
-                    vertices.Add(new Vector3(vertices[ind1].x, TerrainMap[r,c+1].h0, vertices[ind1].z));
-                    vertices.Add(new Vector3(vertices[ind2].x, TerrainMap[r,c+1].h3, vertices[ind2].z));
+                    vertices.Add(new Vector3(vertices[ind1].x, TerrainMap[r, c + 1].h0, vertices[ind1].z));
+                    vertices.Add(new Vector3(vertices[ind2].x, TerrainMap[r, c + 1].h3, vertices[ind2].z));
                     triangles.Add(vertices.Count - 3);
                     triangles.Add(vertices.Count - 4);
                     triangles.Add(vertices.Count - 2);
@@ -388,11 +410,12 @@ public partial class Park : MonoBehaviour
                     normals.Add(Vector3.right);
                     normals.Add(Vector3.right);
                 }
-                if (c > 0 && (TerrainMap[r,c].h0 > TerrainMap[r, c-1].h1 || TerrainMap[r,c].h3 > TerrainMap[r,c-1].h2)) { //left cliff face
+                if (c > 0 && (TerrainMap[r, c].h0 > TerrainMap[r, c - 1].h1 || TerrainMap[r, c].h3 > TerrainMap[r, c - 1].h2))
+                { //left cliff face
                     vertices.Add(vertices[ind0]);
                     vertices.Add(vertices[ind3]);
-                    vertices.Add(new Vector3(vertices[ind0].x, TerrainMap[r,c-1].h1, vertices[ind0].z));
-                    vertices.Add(new Vector3(vertices[ind3].x, TerrainMap[r,c-1].h2, vertices[ind3].z));
+                    vertices.Add(new Vector3(vertices[ind0].x, TerrainMap[r, c - 1].h1, vertices[ind0].z));
+                    vertices.Add(new Vector3(vertices[ind3].x, TerrainMap[r, c - 1].h2, vertices[ind3].z));
                     triangles.Add(vertices.Count - 4);
                     triangles.Add(vertices.Count - 3);
                     triangles.Add(vertices.Count - 1);
@@ -404,11 +427,12 @@ public partial class Park : MonoBehaviour
                     normals.Add(Vector3.left);
                     normals.Add(Vector3.left);
                 }
-                if (r < TilesZ - 1 && (TerrainMap[r,c].h0 > TerrainMap[r+1,c].h0 || TerrainMap[r,c].h1 > TerrainMap[r+1,c].h1)) { // top cliff face
+                if (r < TilesZ - 1 && (TerrainMap[r, c].h0 > TerrainMap[r + 1, c].h0 || TerrainMap[r, c].h1 > TerrainMap[r + 1, c].h1))
+                { // top cliff face
                     vertices.Add(vertices[ind0]);
                     vertices.Add(vertices[ind1]);
-                    vertices.Add(new Vector3(vertices[ind0].x, TerrainMap[r+1, c].h0, vertices[ind0].z));
-                    vertices.Add(new Vector3(vertices[ind1].x, TerrainMap[r+1, c].h1, vertices[ind1].z));
+                    vertices.Add(new Vector3(vertices[ind0].x, TerrainMap[r + 1, c].h0, vertices[ind0].z));
+                    vertices.Add(new Vector3(vertices[ind1].x, TerrainMap[r + 1, c].h1, vertices[ind1].z));
                     triangles.Add(vertices.Count - 3);
                     triangles.Add(vertices.Count - 4);
                     triangles.Add(vertices.Count - 2);
@@ -420,11 +444,12 @@ public partial class Park : MonoBehaviour
                     normals.Add(Vector3.forward);
                     normals.Add(Vector3.forward);
                 }
-                if (r > 0 && (TerrainMap[r,c].h3 >TerrainMap[r-1,c].h3 || TerrainMap[r,c].h2 > TerrainMap[r-1,c].h2)) {
+                if (r > 0 && (TerrainMap[r, c].h3 > TerrainMap[r - 1, c].h3 || TerrainMap[r, c].h2 > TerrainMap[r - 1, c].h2))
+                {
                     vertices.Add(vertices[ind3]);
                     vertices.Add(vertices[ind2]);
-                    vertices.Add(new Vector3(vertices[ind3].x, TerrainMap[r-1,c].h3, vertices[ind3].z));
-                    vertices.Add(new Vector3(vertices[ind2].x, TerrainMap[r-1,c].h3, vertices[ind2].z));
+                    vertices.Add(new Vector3(vertices[ind3].x, TerrainMap[r - 1, c].h3, vertices[ind3].z));
+                    vertices.Add(new Vector3(vertices[ind2].x, TerrainMap[r - 1, c].h3, vertices[ind2].z));
                     triangles.Add(vertices.Count - 4);
                     triangles.Add(vertices.Count - 3);
                     triangles.Add(vertices.Count - 1);
