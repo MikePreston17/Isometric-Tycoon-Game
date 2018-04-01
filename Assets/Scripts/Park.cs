@@ -170,11 +170,11 @@ public partial class Park : MonoBehaviour
     //todo: move to a Park Builder class (Builder Pattern)
     public void GenerateBlocks()
     {
-        for (int r = 0; r < TilesX; r++)
+        for (int row = 0; row < TilesX; row++)
         {
-            for (int c = 0; c < TilesZ; c++)
+            for (int column = 0; column < TilesZ; column++)
             {
-                blocks[r, c] = new BlockData();
+                blocks[row, column] = new BlockData();
             }
         }
     }
