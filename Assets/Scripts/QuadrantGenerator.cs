@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terrain;
 using UnityEngine;
 
@@ -102,29 +103,11 @@ public class QuadrantGenerator
                 ind1 = vertices.Count - 3;
                 ind2 = vertices.Count - 2;
                 ind3 = vertices.Count - 1;
-                // top normals
-                // todo: normals aren't always up, depending upon how the terrain is angled
-                if (TerrainMap[r, c].h0 > 0 && TerrainMap[r, c].h1 > 0 && TerrainMap[r, c].h2 > 0 && TerrainMap[r, c].h3 > 0)
-                {
-                    normals.Add(Vector3.up);
-                    normals.Add(Vector3.up);
-                    normals.Add(Vector3.up);
-                    normals.Add(Vector3.up);
-                }
-                else
-                {
-                    normals.Add(Vector3.down);
-                    normals.Add(Vector3.down);
-                    normals.Add(Vector3.down);
-                    normals.Add(Vector3.down);
-                }
-                // top triangles
-                triangles.Add(ind0);
-                triangles.Add(ind1);
-                triangles.Add(ind2);
-                triangles.Add(ind2);
-                triangles.Add(ind3);
-                triangles.Add(ind0);
+
+                CreateTopNormals(TerrainMap[r, c], normals);
+
+                CreateTopTriangles(triangles, ind0, ind1, ind2, ind2, ind3, ind0);
+
                 if (c == 0)
                 { // furthest west boundary
                     vertices.Add(vertices[ind0]); // match top edge
@@ -273,6 +256,27 @@ public class QuadrantGenerator
         Quadrants[quadrantID].GetComponent<MeshCollider>().sharedMesh = mesh;
         Quadrants[quadrantID].GetComponent<MeshCollider>().convex = true;
     }
+
+    private static void CreateTopNormals(TerrainTile tile, List<Vector3> normals)
+    {
+        // top normals
+        // todo: normals aren't always up, depending upon how the terrain is angled
+        normals.AddRange((tile.h0 > 0 && tile.h1 > 0 && tile.h2 > 0 && tile.h3 > 0) ?
+            Enumerable.Repeat(Vector3.up, 4) : Enumerable.Repeat(Vector3.down, 4));
+    }
+
+    private List<int> CreateTopTriangles(List<int> triangles, params int[] indeces)
+    {
+        if (indeces.Length % 3 != 0)
+        {
+            Debug.Log("Triangle Indeces count must be a multiple of 3!");
+            return new List<int>(0);
+        }
+
+        triangles.AddRange(indeces);
+        return triangles;
+    }
+
 
     public Vector3[] GetCorneredVector3(int row, int column)
     {
