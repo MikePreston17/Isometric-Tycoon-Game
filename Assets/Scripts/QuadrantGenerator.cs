@@ -277,7 +277,6 @@ public class QuadrantGenerator
         return triangles;
     }
 
-
     public Vector3[] GetCorneredVector3(int row, int column)
     {
         Vector3 transform = GetTiledVector3(row, column);

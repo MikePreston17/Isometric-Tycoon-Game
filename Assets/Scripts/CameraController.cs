@@ -39,6 +39,7 @@ public class CameraController : MonoBehaviour
         ray = Camera.main.ScreenPointToRay(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2, 0));
         origin.Raycast(ray, out dist2);
         focus = ray.GetPoint(dist2);
+
         transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * Time.deltaTime * dist / 4, Space.Self);
         transform.Translate(new Vector3(0, 1, 1) * Input.GetAxis("Vertical") * Time.deltaTime * dist / 4, Space.Self);
         transform.Translate(Vector3.forward * velocity * Time.deltaTime * 1000, Space.Self);

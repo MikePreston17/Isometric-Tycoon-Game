@@ -1,41 +1,52 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragPanel : MonoBehaviour, IPointerDownHandler, IDragHandler {
+public class DragPanel : MonoBehaviour, IPointerDownHandler, IDragHandler
+{
     private Vector2 pointerOffset;
     private RectTransform canvasRectTransform;
     private RectTransform panelRectTransform;
 
-    void Awake() {
+    void Awake()
+    {
         Canvas canvas = GetComponentInParent<Canvas>();
-        if (canvas != null) {
+
+        if (canvas != null)
+        {
             canvasRectTransform = canvas.transform as RectTransform;
             panelRectTransform = transform.parent as RectTransform;
         }
     }
 
-    public void OnDrag(PointerEventData eventData) {
+    public void OnDrag(PointerEventData eventData)
+    {
         if (panelRectTransform == null)
+        {
             return;
+        }
 
         Vector2 pointerPostion = ClampToWindow(eventData);
-
         Vector2 localPointerPosition;
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            canvasRectTransform, pointerPostion, eventData.pressEventCamera, out localPointerPosition
-        )) {
+
+        bool result = RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform
+            , pointerPostion
+            , eventData.pressEventCamera
+            , out localPointerPosition);
+
+        if (result)
+        {
             panelRectTransform.localPosition = localPointerPosition - pointerOffset;
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData) {
+    public void OnPointerDown(PointerEventData eventData)
+    {
         panelRectTransform.SetAsLastSibling();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(panelRectTransform, eventData.position, eventData.pressEventCamera, out pointerOffset);
     }
-    Vector2 ClampToWindow(PointerEventData data) {
+
+    Vector2 ClampToWindow(PointerEventData data)
+    {
         Vector2 rawPointerPosition = data.position;
 
         Vector3[] canvasCorners = new Vector3[4];

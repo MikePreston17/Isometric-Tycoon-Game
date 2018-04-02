@@ -9,7 +9,6 @@ public class Guest : ScriptableObject {
     int age = 50;
     GameObject gameObject;
 
-
     public void Awake () {
         Debug.Log("I'm awake");
         // TODO: Instanatiate the body of the guest

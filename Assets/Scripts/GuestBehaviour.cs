@@ -15,8 +15,5 @@ public class GuestBehaviour : Behaviour {
         child = new PathfindingAction();
         
 
-
-
-
     }
 }

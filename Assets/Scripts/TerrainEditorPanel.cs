@@ -27,7 +27,6 @@ public class TerrainEditorPanel : MonoBehaviour, IPointerDownHandler, IBeginDrag
         Debug.Log("Decremented radius!");
     }
 
-
     private void Awake() {
         
         

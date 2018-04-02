@@ -21,7 +21,7 @@ namespace Assets.Scripts.Sandbox_MP
             }
         }
 
-        public GameObject prefabPrototype;
+        public GameObject prefabPrototype;// = new GameObject("Bullet");
         public GameObject prefabContainer;
         public List<GameObject> bullets = new List<GameObject>();
 
