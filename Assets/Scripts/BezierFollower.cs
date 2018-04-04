@@ -80,6 +80,12 @@ public class BezierFollower : MonoBehaviour
                 9, 0
             };
 
+        GameObject go;
+        if(go)
+        {
+
+        }
+
         return new ExtrudeShape(vert2Ds, lines);
     }
 

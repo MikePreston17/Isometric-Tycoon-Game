@@ -352,6 +352,7 @@
     <Compile Include="Assets\Scripts\QuadrantGenerator.cs" />
     <Compile Include="Assets\Scripts\Sandbox_MP\BulletBehaviour.cs" />
     <Compile Include="Assets\Scripts\Sandbox_MP\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Sandbox_MP\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Sandbox_MP\ObjectPoolManager.cs" />
     <Compile Include="Assets\Scripts\Sequence.cs" />
     <Compile Include="Assets\Scripts\Serialization.cs" />
