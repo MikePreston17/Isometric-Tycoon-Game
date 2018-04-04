@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -329,7 +331,15 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Behaviour\Behaviour.cs" />
     <Compile Include="Assets\Scripts\Behaviour\BehaviourTree.cs" />
-    <Compile Include="Assets\Scripts\BezierFollower.cs" />
+    <Compile Include="Assets\Scripts\Beziers\Bezier.cs" />
+    <Compile Include="Assets\Scripts\Beziers\Bezier3.cs" />
+    <Compile Include="Assets\Scripts\Beziers\Bezier4.cs" />
+    <Compile Include="Assets\Scripts\Beziers\BezierFollower.cs" />
+    <Compile Include="Assets\Scripts\Beziers\Beziers.cs" />
+    <Compile Include="Assets\Scripts\Beziers\ExtrudeShape.cs" />
+    <Compile Include="Assets\Scripts\Beziers\IBezier.cs" />
+    <Compile Include="Assets\Scripts\Beziers\OrientedPoint.cs" />
+    <Compile Include="Assets\Scripts\Beziers\Vertex.cs" />
     <Compile Include="Assets\Scripts\Block.cs" />
     <Compile Include="Assets\Scripts\BlockData.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
@@ -577,6 +587,7 @@
     <None Include="Assets\ShaderForge\Example Assets\Shaders\VertexColorRounding.shader" />
     <None Include="Assets\ShaderForge\Readme.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
 </Project>

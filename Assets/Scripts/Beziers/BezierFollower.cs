@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer))]
-public class BezierFollower : MonoBehaviour
+[RequireComponent(typeof(MeshRenderer)), RequireComponent(typeof(MeshFilter))]
+public partial class BezierFollower : MonoBehaviour
 {
     /* scratchpad */
     private MeshFilter meshFilter;
@@ -79,12 +79,6 @@ public class BezierFollower : MonoBehaviour
                 8, 9,
                 9, 0
             };
-
-        GameObject go;
-        if(go)
-        {
-
-        }
 
         return new ExtrudeShape(vert2Ds, lines);
     }
@@ -176,7 +170,7 @@ public class BezierFollower : MonoBehaviour
         float distanceCovered = 0;
         for (int i = 0; i < path.Length - 1; i++)
         {
-            float d = Vector3.Distance(path[i].position, path[i + 1].position);
+            var d = Vector3.Distance(path[i].Position, path[i + 1].Position);
             totalLength += d;
         }
 
@@ -185,7 +179,7 @@ public class BezierFollower : MonoBehaviour
             int offset = i * vertsInShape;
             if (i > 0)
             {
-                float d = Vector3.Distance(path[i].position, path[i - 1].position);
+                var d = Vector3.Distance(path[i].Position, path[i - 1].Position);
                 distanceCovered += d;
             }
             float v = distanceCovered / totalLength;
@@ -193,8 +187,8 @@ public class BezierFollower : MonoBehaviour
             for (int j = 0; j < vertsInShape; j++)
             {
                 int id = offset + j;
-                vertices[id] = path[i].LocalToWorld(shape.vert2Ds[j].point);
-                normals[id] = path[i].LocalToWorldDirection(shape.vert2Ds[j].normal);
+                vertices[id] = path[i].LocalToWorld(shape.vert2Ds[j].Point);
+                normals[id] = path[i].LocalToWorldDirection(shape.vert2Ds[j].Normal);
                 uvs[id] = new Vector2(shape.vert2Ds[j].uCoord, v);
             }
         }
@@ -226,58 +220,5 @@ public class BezierFollower : MonoBehaviour
         //mesh.RecalculateBounds();
         //mesh.RecalculateTangents();
         //mesh.RecalculateNormals();
-    }
-
-    public struct ExtrudeShape
-    {
-        public Vertex[] vert2Ds;
-        public int[] lines;
-
-        public ExtrudeShape(Vertex[] vert2Ds, int[] lines)
-        {
-            this.vert2Ds = vert2Ds;
-            this.lines = lines;
-        }
-    }
-
-    public struct Vertex
-    {
-        public Vector3 point;
-        public Vector3 normal;
-        public float uCoord;
-
-        public Vertex(Vector3 point, Vector3 normal, float uCoord)
-        {
-            this.point = point;
-            this.normal = normal;
-            this.uCoord = uCoord;
-        }
-    }
-
-    public struct OrientedPoint
-    {
-        public Vector3 position;
-        public Quaternion rotation;
-
-        public OrientedPoint(Vector3 position, Quaternion rotation)
-        {
-            this.position = position;
-            this.rotation = rotation;
-        }
-
-        public Vector3 LocalToWorld(Vector3 point)
-        {
-            return position + rotation * point;
-        }
-
-        public Vector3 WorldToLocal(Vector3 point)
-        {
-            return Quaternion.Inverse(rotation) * (point - position);
-        }
-
-        public Vector3 LocalToWorldDirection(Vector3 dir)
-        {
-            return rotation * dir;
-        }
     }
 }

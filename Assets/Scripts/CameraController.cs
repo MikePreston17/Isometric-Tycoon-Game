@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
     Plane origin = new Plane(Vector3.up, Vector3.zero);
     Vector3 cursor;
     Vector3 focus;
-    float dist;  //todo: what kind of distance?  Name it.
+    float terrainDistance;
     float dist2; //todo: what kind of distance?  Name it.
     public float velocity;
     int terrainMask = 1 << 8;
@@ -26,8 +26,8 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        origin.Raycast(ray, out dist);
-        cursor = ray.GetPoint(dist);
+        origin.Raycast(ray, out terrainDistance);
+        cursor = ray.GetPoint(terrainDistance);
         if (Physics.Raycast(ray, out info, Mathf.Infinity, terrainMask))
         {
             //ProjectorObject.transform.position = new Vector3(info.transform.position.x, 150, info.transform.position.z);
@@ -40,8 +40,8 @@ public class CameraController : MonoBehaviour
         origin.Raycast(ray, out dist2);
         focus = ray.GetPoint(dist2);
 
-        transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * Time.deltaTime * dist / 4, Space.Self);
-        transform.Translate(new Vector3(0, 1, 1) * Input.GetAxis("Vertical") * Time.deltaTime * dist / 4, Space.Self);
+        transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * Time.deltaTime * terrainDistance / 4, Space.Self);
+        transform.Translate(new Vector3(0, 1, 1) * Input.GetAxis("Vertical") * Time.deltaTime * terrainDistance / 4, Space.Self);
         transform.Translate(Vector3.forward * velocity * Time.deltaTime * 1000, Space.Self);
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -57,7 +57,6 @@ public class CameraController : MonoBehaviour
             //Park.Instance.Save("debug");
         }
     }
-
     private void LateUpdate()
     {
         velocity *= .99f * Time.deltaTime; // todo: scale accurately to framerate

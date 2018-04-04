@@ -56,8 +56,6 @@ public partial class Park : MonoBehaviour
         quadrantGenerator.GenerateQuadrants();
         GenerateBlocks();
         quadrantGenerator.GenerateAllQuadrantMeshes();
-
-        //Load("debug"); //Todo: Park should not have the ability to load itself.  Have another entity create and use the ParkManager I created below.
         new ParkManager().Load(this, "debug");
     }
 

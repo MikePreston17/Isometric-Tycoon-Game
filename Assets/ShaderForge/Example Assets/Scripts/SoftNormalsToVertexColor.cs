@@ -65,7 +65,7 @@ public class SoftNormalsToVertexColor : MonoBehaviour {
 
 		foreach( List<int> group in groups ) { // Calculate soft normals
 			Vector3 avgNrm = Vector3.zero;
-			foreach( int i in group ) { // TODO: This can actually be improved. Averaging will not give the best outline.
+			foreach( int i in group ) {
 				avgNrm += n[i];
 			}
 			avgNrm.Normalize(); // Average normal done
