@@ -5,11 +5,9 @@ public partial class BezierFollower : MonoBehaviour
 {
     /* scratchpad */
     private MeshFilter meshFilter;
-
     void Start()
     {
         meshFilter = GetComponent<MeshFilter>();
-
         GenerateMesh();
     }
 

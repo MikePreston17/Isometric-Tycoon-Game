@@ -18,14 +18,13 @@ public class QuadrantGenerator
     private int TilesZ { get { return park.TilesZ; } }
     private int TilesX { get { return park.TilesX; } }
     public TerrainTile[,] TerrainMap { get { return park.TerrainMap; } }
+    //TerrainQuadrant Quadrants[,] {get{return park.Quadrants;}
 
     public QuadrantGenerator(Park park)
     {
         this.park = park;
         Quadrants = new TerrainQuadrant[4];
     }
-
-    //TerrainQuadrant Quadrants[,] {get{return park.Quadrants;}
 
     public void GenerateQuadrants()
     {

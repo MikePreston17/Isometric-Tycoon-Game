@@ -1,16 +1,14 @@
 ﻿<Properties StartupItem="Isometric Tycoon Game.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BezierFollower.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scenes\Sandbox_MP\Scripts\ObjectPooler.cs">
     <Files>
       <File FileName="Assets\Scripts\GameController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\QuadrantGenerator.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Sandbox_MP\ObjectPoolManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Standard Assets\Effects\ImageEffects\Scripts\PostEffectsBase.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GuestBehaviour.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\LandPatch.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\CameraController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Block.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BezierFollower.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scenes\Sandbox_MP\Scripts\ObjectPooler.cs" Line="23" Column="10" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

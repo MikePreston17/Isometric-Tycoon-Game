@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -329,17 +327,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scenes\Sandbox_MP\Scripts\BulletBehaviour.cs" />
+    <Compile Include="Assets\Scenes\Sandbox_MP\Scripts\BulletPool.cs" />
+    <Compile Include="Assets\Scenes\Sandbox_MP\Scripts\Cube.cs" />
+    <Compile Include="Assets\Scenes\Sandbox_MP\Scripts\CubeSpawner.cs" />
+    <Compile Include="Assets\Scenes\Sandbox_MP\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scenes\Sandbox_MP\Scripts\ObjectPooler.cs" />
+    <Compile Include="Assets\Scenes\Sandbox_MP\Scripts\ObjectPoolManager.cs" />
     <Compile Include="Assets\Scripts\Behaviour\Behaviour.cs" />
     <Compile Include="Assets\Scripts\Behaviour\BehaviourTree.cs" />
-    <Compile Include="Assets\Scripts\Beziers\Bezier.cs" />
-    <Compile Include="Assets\Scripts\Beziers\Bezier3.cs" />
-    <Compile Include="Assets\Scripts\Beziers\Bezier4.cs" />
-    <Compile Include="Assets\Scripts\Beziers\BezierFollower.cs" />
-    <Compile Include="Assets\Scripts\Beziers\Beziers.cs" />
-    <Compile Include="Assets\Scripts\Beziers\ExtrudeShape.cs" />
-    <Compile Include="Assets\Scripts\Beziers\IBezier.cs" />
-    <Compile Include="Assets\Scripts\Beziers\OrientedPoint.cs" />
-    <Compile Include="Assets\Scripts\Beziers\Vertex.cs" />
     <Compile Include="Assets\Scripts\Block.cs" />
     <Compile Include="Assets\Scripts\BlockData.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
@@ -351,22 +347,27 @@
     <Compile Include="Assets\Scripts\GuestBehaviour.cs" />
     <Compile Include="Assets\Scripts\LandPatch.cs" />
     <Compile Include="Assets\Scripts\LollygagAction.cs" />
-    <Compile Include="Assets\Scripts\Park.cs" />
-    <Compile Include="Assets\Scripts\ParkManager.cs" />
+    <Compile Include="Assets\Scripts\Park\Park.cs" />
+    <Compile Include="Assets\Scripts\Park\ParkManager.cs" />
+    <Compile Include="Assets\Scripts\Park\QuadrantGenerator.cs" />
+    <Compile Include="Assets\Scripts\Park\TerrainQuadrant.cs" />
     <Compile Include="Assets\Scripts\Paths\Path.cs" />
     <Compile Include="Assets\Scripts\Paths\PathfindingAction.cs" />
     <Compile Include="Assets\Scripts\Paths\PathTool.cs" />
     <Compile Include="Assets\Scripts\Person.cs" />
     <Compile Include="Assets\Scripts\Ploppable.cs" />
-    <Compile Include="Assets\Scripts\Quadrant.cs" />
-    <Compile Include="Assets\Scripts\QuadrantGenerator.cs" />
-    <Compile Include="Assets\Scripts\Sandbox_MP\BulletBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Sandbox_MP\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Sandbox_MP\ObjectPool.cs" />
-    <Compile Include="Assets\Scripts\Sandbox_MP\ObjectPoolManager.cs" />
     <Compile Include="Assets\Scripts\Sequence.cs" />
     <Compile Include="Assets\Scripts\Serialization.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Splines\Bezier.cs" />
+    <Compile Include="Assets\Scripts\Splines\Bezier3.cs" />
+    <Compile Include="Assets\Scripts\Splines\Bezier4.cs" />
+    <Compile Include="Assets\Scripts\Splines\BezierFollower.cs" />
+    <Compile Include="Assets\Scripts\Splines\BezierFollower2.cs" />
+    <Compile Include="Assets\Scripts\Splines\Beziers.cs" />
+    <Compile Include="Assets\Scripts\Splines\ExtrudeShape.cs" />
+    <Compile Include="Assets\Scripts\Splines\OrientedPoint.cs" />
+    <Compile Include="Assets\Scripts\Splines\Vertex.cs" />
     <Compile Include="Assets\Scripts\Standard Assets\Effects\ImageEffects\Scripts\PostEffectsBase.cs" />
     <Compile Include="Assets\Scripts\Standard Assets\Effects\ImageEffects\Scripts\Tonemapping.cs" />
     <Compile Include="Assets\Scripts\TerrainEditor.cs" />
@@ -587,7 +588,6 @@
     <None Include="Assets\ShaderForge\Example Assets\Shaders\VertexColorRounding.shader" />
     <None Include="Assets\ShaderForge\Readme.txt" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
 </Project>

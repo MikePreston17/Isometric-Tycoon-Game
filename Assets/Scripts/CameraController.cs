@@ -17,8 +17,6 @@ public class CameraController : MonoBehaviour
     void Awake()
     {
         velocity = 0;
-        //Park.Instance.Load("debug");
-        Debug.Log("Camera awake");
         var park = Park.Instance;
     }
 
